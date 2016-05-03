@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="empController">
+<meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="lib/angular.js"></script>
+    <script src="lib/angular-messages.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/empController.js"></script>
+    <script src="js/empService.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <title></title>
+</head>
+<body>
+<div class="container" >
+    <div class="panel-heading">
+        <h1>Employee details</h1>
+    </div>
+    <form name="employeeForm" ng-submit="submitForm()" novalidate>
+
+        <label class="control-label">Employee name:</label>
+        <input type="text" class="form-control" ng-model="txtName" name="txtName" ng-minlength="5" ng-maxlength="30"
+               required>
+
+        <div ng-messages="employeeForm.txtName.$error" ng-messages-include="templates/error-messages.html" class="form-errors"
+             ng-if="employeeForm.txtName.$touched"></div>
+
+        <label class="control-label">Age:</label>
+        <input ng-pattern="/^\d+$/" class="form-control" ng-model="txtAge" name="txtAge" required>
+
+        <div ng-messages="employeeForm.txtAge.$error" ng-messages-include="templates/error-messages.html" class="form-errors"
+             ng-if="employeeForm.txtAge.$touched"></div>
+
+        <label class="control-label">Basic salary:</label>
+        <input type="text" id="txtBS" class="form-control" ng-model="txtBS" name="txtBS" required>
+
+        <div ng-messages="employeeForm.txtBS.$error" ng-messages-include="templates/error-messages.html" class="form-errors"
+             ng-if="employeeForm.txtBS.$touched"></div>
+
+        <label class="control-label">Has vehicle:</label>
+        <input type="checkbox" id="chkVehicle" ng-model="chkVehicle" name="chkVehicle">
+
+        <div></div>
+
+        <div>
+        <label class="control-label">Gender:</label>
+        <input type="radio" name="sex" value="Male" ng-model="rb1"> Male
+        <input type="radio" name="sex" value="Female" ng-model="rb1"> Female
+        </div>
+
+        <label class="control-label">House Rent Allowance%:</label>
+        <input ng-pattern="/^\d+$/" class="form-control" id="txtHRA" ng-model="txtHRA" name="txtHRA" required>
+
+        <div ng-messages="employeeForm.txtHRA.$error" ng-messages-include="templates/error-messages.html" class="form-errors"
+             ng-if="employeeForm.txtHRA.$touched"></div>
+
+        <div ng-show="chkVehicle == true">
+            <label class="control-label">Petrol Allowance:</label>
+            <input ng-pattern="/^\d+$/" class="form-control" id="txtPA" ng-model="txtPA" name="txtPA"
+                   ng-required="chkVehicle == true">
+
+            <div ng-messages="employeeForm.txtPA.$error" ng-messages-include="templates/error-messages.html" class="form-errors"
+                 ng-if="employeeForm.txtPA.$touched"></div>
+        </div>
+
+        <label class="control-label">Other Allowance%:</label>
+        <input ng-pattern="/^\d+$/" class="form-control" id="txtOA" ng-model="txtOA" name="txtOA" required>
+
+        <div ng-messages="employeeForm.txtOA.$error" ng-messages-include="templates/error-messages.html" class="form-errors"
+             ng-if="employeeForm.txtOA.$touched"></div>
+
+        <label class="control-label">Insurance%:</label>
+        <input ng-pattern="/^\d+$/" class="form-control" id="txtIns" ng-model="txtIns" name="txtIns" required>
+
+        <div ng-messages="employeeForm.txtIns.$error" ng-messages-include="templates/error-messages.html" class="form-errors"
+             ng-if="employeeForm.txtIns.$touched"></div>
+
+        <input type="submit" value="Submit" class="btn-primary" ng-disabled="employeeForm.$invalid">
+
+    </form>
+</div>
+<div class="container" ng-hide="divHide">
+    <table>
+        <tr>
+            <td>
+                <label class="control-label">Employee name:</label>
+                <label class="control-label" ng-bind="lblName"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label">Age:</label>
+                <label class="control-label" ng-bind="lblAge"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label">Basic Salary:</label>
+                <label class="control-label" ng-bind="lblBS"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label">Has vehicle:</label>
+                <label class="control-label" ng-bind="lblHasVehicle"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label">Gender:</label>
+                <label class="control-label" ng-bind="lblGender"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label">Other Allowance:</label>
+                <label class="control-label" ng-bind="lblOA"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label">House Rent Allowance:</label>
+                <label class="control-label" ng-bind="lblHRA"></label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label class="control-label">Insurance:</label>
+                <label class="control-label" ng-bind="lblIns"></label>
+            </td>
+        </tr>
+        <tr>
+            <td ng-show="chkVehicle == true">
+                <label class="control-label">Petrol Allowance:</label>
+                <label class="control-label" ng-bind="lblPA"></label>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
